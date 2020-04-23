@@ -1,6 +1,23 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 const path = require('path')
+
+// MENUS
+let mainMenu = new Menu.buildFromTemplate([
+  {
+    label: 'Electron example',
+    submenu: [
+      { label: 'Item 1'},
+      { label: 'Item 2', submenu: [{label: 'sub item 1'}]}
+    ]
+  }
+]);
+
+let contextMenu = new Menu.buildFromTemplate([
+  { label: 'Item 1'},
+  { label: 'Item 2'}
+])
+
 
 function createWindow () {
   // Create the browser window.
@@ -12,17 +29,52 @@ function createWindow () {
     }
   })
 
+  const secondaryWindow = new BrowserWindow({
+    width: 400,
+    height: 300,
+    webPreferences: {
+      nodeIntegration: true
+    },
+    parent: mainWindow
+  })
+
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('index.html');
+  secondaryWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+  Menu.setApplicationMenu(mainMenu);
+
+  // Window Events
+  mainWindow.on('focus', () => {
+    console.log("main focus");
+  })
+
+  secondaryWindow.on('focus', () => {
+    console.log("secundary focus");
+  })
+
+  secondaryWindow.on('closed', () => {
+     // Window methods
+    mainWindow.maximize();
+  })
+
+  secondaryWindow.webContents.on('context-menu', e => {
+    contextMenu.popup();
+  })
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow();
+})
+
+app.on('browser-window-focus', () => {
+  console.log("focus App");
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
