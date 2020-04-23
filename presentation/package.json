@@ -1,0 +1,30 @@
+{
+  "name": "marp_presentation",
+  "version": "1.0.0",
+  "description": "coding presentation",
+  "main": "index.js",
+  "scripts": {
+    "start": "marp -p -s -w --html ./slides",
+    "build": "marp slides/deck.md",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhonny111s/electron.git"
+  },
+  "keywords": [
+    "marp",
+    "presentation",
+    "electron"
+  ],
+  "author": "jhonny111s",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhonny111s/electron/issues"
+  },
+  "homepage": "https://github.com/jhonny111s/electron#readme",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^0.17.4",
+    "mermaid": "^8.5.0"
+  }
+}
