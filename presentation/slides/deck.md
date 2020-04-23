@@ -1,5 +1,6 @@
 ---
 marp: true
+size: 4:3
 theme: gaia
 _class: lead
 paginate: true
@@ -14,7 +15,7 @@ backgroundImage: url('https://marp.app/assets/hero-background.jpg')
 Build cross-platform desktop apps with JavaScript, HTML, and CSS
 
 ---
-
+<!-- _class: lead -->
 # What is electron
 
 - Chromium :heart: 
@@ -44,7 +45,7 @@ es el lenguaje backend en javascript (v8 engine) que nos permite comunicarnos co
  -->
 
 ---
-
+<!-- _class: lead -->
 # Who is using Electron
 
 - Github (*atom*)
@@ -56,11 +57,18 @@ es el lenguaje backend en javascript (v8 engine) que nos permite comunicarnos co
 - microsoft (*vscode*) :cupid:
 
 ---
-
+<!-- _class: lead -->
 # How does electron works
 
+In Electron, the process that runs package.json's main script is called the main process. The script that runs in the main process can display a GUI by creating web pages. An Electron app always has one main process, but never more.
 
-<div class="mermaid">
+Since Electron uses Chromium for displaying web pages, Chromium's multi-process architecture is also used. Each web page in Electron runs in its own process, which is called the renderer process.
+
+---
+# Main and Render process
+<br/>
+<br/>
+<div class="mermaid" style="text-align:center;">
 graph LR
     MainProcess-->RenderProcess1
     MainProcess-->RenderProcess2
@@ -77,8 +85,17 @@ instancia de chromim - cliente side
 pueden cargar paginas web (html, css, js), ya que pueden ser multiples procesos toma todas las ventajas de chromium multiprocess, a diferencia de las paginas web que conocemos existe la posibilidad de acceder directamente al api de node desde el proceso render
  -->
 ---
+| Main process   | Render process | IPC | Shared API   |
+|:----------------:|:--------------------:|:-------------------:|:--------------:|
+| browser window, web content, dialog, session, menu, tray, power monitor | remote, browser window proxy, webframe, desktop capturer| ipc main, ipc render| process, screen, shell, native image, clipboard|
+[API](https://www.electronjs.org/docs/api)
 
+---
 
+## Thank you
+ :pray:
+
+---
 <!-- mermaid.js -->
 <script src="https://unpkg.com/mermaid@8.1.0/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
