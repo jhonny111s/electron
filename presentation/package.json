@@ -25,6 +25,6 @@
   "homepage": "https://github.com/jhonny111s/electron#readme",
   "devDependencies": {
     "@marp-team/marp-cli": "^0.17.4",
-    "mermaid": "^8.5.0"
+    "mermaid": "^8.13.8"
   }
 }
